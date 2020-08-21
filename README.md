@@ -55,10 +55,10 @@ func main() {
     })
 
     paymentData := map[string]string {
-        "from": "841234567",               // input_CustomerMSISDN
-        "reference": "11114",              // input_ThirdPartyReference
-        "transation": "T12344CC",          // input_TransactionReference
-        "amount": "10"  
+        "from": "841234567",           // input_CustomerMSISDN
+        "reference": "11114",          // input_ThirdPartyReference
+        "transation": "T12344CC",      // input_TransactionReference
+        "amount": "10"                 // input_Amountss
     }
 
     if response, error := client.Receive(paymentData); error != nil {
@@ -108,7 +108,7 @@ func main() {
 
 ## License <a name="license"></a>
 
-Copyright 2020 Edson Michaque and Nélio Macombo
+Copyright 2020 Edson Michaque
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
 
