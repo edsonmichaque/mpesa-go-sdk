@@ -1,4 +1,11 @@
 package mpesa
 
+type ErrorType string
 
-type Error struct {}
+const (
+	MissingProperties = iota
+	ValidationErrors
+) 
+type Error struct {
+	Type ErrorType
+}
