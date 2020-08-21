@@ -31,12 +31,15 @@ func (s *Service) HandleQuery(intent map[string]string) (*Response, *Error) {
 }
 
 func (s *Service) handleRequest(opcode Opcode, intent map[string]string) (*Response, *Error) {
-	missingProperties := s.detectMissingProperties(opcode, intent)
+
+	data := s.fillOptionalProperties(opcode, intent)
+
+	missingProperties := s.detectMissingProperties(opcode, data)
 	if len(missingProperties) > 0 {
 		return nil, new(Error)
 	}
 
-	validationErrors := s.detectValidationErrors(opcode, intent)
+	validationErrors := s.detectValidationErrors(opcode, data)
 	if len(validationErrors) > 0 {
 		return nil, new(Error)
 	}
@@ -54,4 +57,8 @@ func (s *Service) detectMissingProperties(opcode Opcode, intent map[string]strin
 
 func (s *Service) detectValidationErrors(opcode Opcode, intent map[string]string) []string {
 	return []string{}
+}
+
+func (s *Service) fillOptionalProperties(opcode Opcode, intent map[string]string) map[string]string {
+	return map[string]string{}
 }
