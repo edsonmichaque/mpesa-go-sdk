@@ -31,10 +31,27 @@ func (s *Service) HandleQuery(intent map[string]string) (*Response, *Error) {
 }
 
 func (s *Service) handleRequest(opcode Opcode, intent map[string]string) (*Response, *Error) {
+	missingProperties := s.detectMissingProperties(opcode, intent)
+	if len(missingProperties) > 0 {
+		return nil, new(Error)
+	}
+
+	validationErrors := s.detectValidationErrors(opcode, intent)
+	if len(validationErrors) > 0 {
+		return nil, new(Error)
+	}
 	
-	return new(Response), new(Error)
+	return new(Response), nil
 }
 
 func (s *Service) detectOperation(intent map[string]string) Opcode {
 	return B2cPayment
+}
+
+func (s *Service) detectMissingProperties(opcode Opcode, intent map[string]string) []string { 
+	return []string{}
+}
+
+func (s *Service) detectValidationErrors(opcode Opcode, intent map[string]string) []string {
+	return []string{}
 }
