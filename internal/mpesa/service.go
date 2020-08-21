@@ -2,11 +2,14 @@ package mpesa
 
 
 type Service struct {
-	config string
+	config *Configuration
 }
 
-func NewService(config map[string]interface{}) *Service {
-	return nil
+func NewService(options map[string]interface{}) *Service {
+	service := new(Service)
+	service.config = NewConfiguration(options)
+
+	return service
 }
 
 func (s *Service) HandleReceive(params map[string]string) *Response {
